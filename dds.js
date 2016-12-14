@@ -1,5 +1,3 @@
-<script type="text/javascript">
-
 // Object has days of the month as keys, and arrays 
 // that contain the months that have those days.
 days = {
@@ -67,4 +65,3 @@ $(document).ready(function() {
 		}
 	});
 });
-</script>
