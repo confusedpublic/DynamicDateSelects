@@ -31,18 +31,18 @@ find_days = function(month) {
 
 $(document).ready(function() {
   // Change this value to your Month select box's id.
-	$('#id_after_1').change(function() {
+	$('#month').change(function() {
 		var selected_month = $(this).val();
 		day = find_days(selected_month);
     
     // Change this value to your Day select box's id.
-		if ($('#id_after_0 option:last').val() < day) {
+		if ($('#day option:last').val() < day) {
       // If the last option is less than the number of days in the month,
       // refill the select box with the correct number of options
-			$('#id_after_0').empty();
+			$('#day').empty();
 			for (i = 0; i <= day; i++) {
 				if (i == 0) {
-					$('#id_after_0').append($('<option></option>').attr("value", i).text("DD"));
+					$('#day').append($('<option></option>').attr("value", i).text("DD"));
 				}
 				else {
           // 0 Padding
@@ -52,14 +52,14 @@ $(document).ready(function() {
 					else {
 						i_str = i
 					}
-					$('#id_after_0').append($('<option></option>').attr("value", i).text(i_str));
+					$('#day').append($('<option></option>').attr("value", i).text(i_str));
 				}
 			}			
 		}
 		else {
       // If the last option is greater than the number of days in the month,
       // remove the options that are for more days.
-			$('#id_after_0 option').each(function() {		
+			$('#day option').each(function() {		
 				if ($(this).val() > day) {
 					$(this).remove();
 				}
