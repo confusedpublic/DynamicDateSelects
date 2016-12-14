@@ -59,8 +59,6 @@ find_days = function(month, period) {
 // Function to alter the day selection's option tags
 alter_days = function(day, period) {
 	
-	console.log("Going to alter the days then.");
-	
 	if (year_select.indexOf("#") == -1) {
 		year_select = '#id_' + period + year_select;
 	}
