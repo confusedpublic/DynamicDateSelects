@@ -1,7 +1,7 @@
 // Change these values to your day, month and year select ids
-var day_select = '_0';
-var month_select = '_1';
-var year_select = '_2';
+var day_select_suffix = '_0';
+var month_select_suffix = '_1';
+var year_select_suffix = '_2';
 
 // Object has days of the month as keys, and arrays 
 // that contain the months that have those days.
@@ -25,8 +25,8 @@ is_leap_year = function(year) {
 // Function to cycle through the days object
 find_days = function(month, period) {
 	
-	if (year_select.indexOf("#") == -1) {
-		year_select = '#id_' + period + year_select;
+	if ((typeof(year_select) == 'undefined' ) || (year_select.indexOf("#") == -1)) {
+		year_select = '#id_' + period + year_select_suffix;
 	}
 	
 	if (month == 0) {
@@ -59,11 +59,11 @@ find_days = function(month, period) {
 // Function to alter the day selection's option tags
 alter_days = function(day, period) {
 	
-	if (year_select.indexOf("#") == -1) {
-		year_select = '#id_' + period + year_select;
+	if ((typeof(year_select) == 'undefined' ) || (year_select.indexOf("#") == -1)) {
+		year_select = '#id_' + period + year_select_suffix;
 	}
-	if (day_select.indexOf("#") == -1) {
-		day_select = '#id_' + period + day_select;
+	if ((typeof(day_select) == 'undefined' ) || (day_select.indexOf("#") == -1) || (day_select.indexOf(period) == -1)) {
+		day_select = '#id_' + period + day_select_suffix;
 	}
 
 	// Don't alter these variables.
@@ -103,7 +103,7 @@ alter_days = function(day, period) {
 
 $(document).ready(function() {
   	
-	$('#id_before' + month_select).change(function() {
+	$('#id_before' + month_select_suffix).change(function() {
 		
 		period="before";
 		selected_month = $(this).val();
@@ -111,13 +111,15 @@ $(document).ready(function() {
 		day = find_days(selected_month, period);
 		
 		alter_days(day, period);
+		
+		day_select = month_select = year_select = "";
 	});
 	
-	$('#id_before' + year_select).change(function() {
+	$('#id_before' + year_select_suffix).change(function() {
 		
 		period="before";
-		if (month_select.indexOf("#") == -1) {
-			month_select = '#id_' + period + month_select;
+		if ((typeof(month_select) == 'undefined' ) ||  (month_select.indexOf("#") == -1)) {
+			month_select = '#id_' + period + month_select_suffix;
 		}
 		
 		selected_month = $(month_select).val();
@@ -125,23 +127,28 @@ $(document).ready(function() {
 		day = find_days(selected_month, period);
 		
 		alter_days(day, period);
+		
+		day_select = month_select = year_select = "";
+		
 	});
 	
-	$('#id_after' + month_select).change(function() {
+	$('#id_after' + month_select_suffix).change(function() {
 		
 		period="after";
 		selected_month = $(this).val();
 		
 		day = find_days(selected_month, period);
-		
+				
 		alter_days(day, period);
+		
+		day_select = month_select = year_select = "";
 	});
 	
-	$('#id_after' + year_select).change(function() {
+	$('#id_after' + year_select_suffix).change(function() {
 		
 		period="after";
-		if (month_select.indexOf("#") == -1) {
-			month_select = '#id_' + period + month_select;
+		if ((typeof(month_select) == 'undefined' ) || (month_select.indexOf("#") == -1)) {
+			month_select = '#id_' + period + month_select_suffix;
 		}
 		
 		selected_month = $(month_select).val();
@@ -149,6 +156,8 @@ $(document).ready(function() {
 		day = find_days(selected_month, period);
 		
 		alter_days(day, period);
+		
+		day_select = month_select = year_select = "";
 	});
 	
 });
