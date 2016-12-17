@@ -6,6 +6,7 @@ var year_select = '#year';
 // Don't alter these variables.
 var day_select_option = day_select + ' option';
 var day_select_last_option = day_select_option + ':last';
+var day_select_selected = day_select_option + ':selected';
 
 
 // Object has days of the month as keys, and arrays 
@@ -62,8 +63,9 @@ find_days = function(month) {
 alter_days = function(day) {
 
 	if ($(day_select_last_option).val() < day) {
-    // If the last option is less than the number of days in the month,
-    // refill the select box with the correct number of options
+        // If the last option is less than the number of days in the month,
+        // refill the select box with the correct number of options
+		selected_day = $(day_select_selected).val();
 		$(day_select).empty();
 		for (i = 0; i <= day; i++) {
 			if (i == 0) {
@@ -77,7 +79,12 @@ alter_days = function(day) {
 				else {
 					i_str = i;
 				}
-				$(day_select).append($('<option></option>').attr("value", i).text(i_str));
+				if (i == selected_day) {
+					$(day_select).append($('<option></option>').attr({"value": i, "selected": "selected"}).text(i_str));
+				}
+				else {
+					$(day_select).append($('<option></option>').attr("value", i).text(i_str));
+				}
 			}
 		}			
 	}
