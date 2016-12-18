@@ -106,9 +106,7 @@ $(document).ready(function() {
 		
 		day = find_days(selected_month);
 		
-		if (day !== false) {
-			alter_days(day);
-		}
+		alter_days(day);
 	});
 	
 	$(year_select).change(function() {
