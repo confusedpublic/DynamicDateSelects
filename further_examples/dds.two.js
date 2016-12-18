@@ -71,7 +71,7 @@ alter_days = function(day, period) {
 	day_select_last_option = day_select_option + ':last';
 	day_select_selected = day_select_option + ':selected';	
 	
-	if ($(day_select_last_option).val() < day) {
+	if (parseInt($(day_select_last_option).val()) < day) {
        // If the last option is less than the number of days in the month,
        // refill the select box with the correct number of options
 		selected_day = $(day_select_selected).val();
@@ -102,7 +102,7 @@ alter_days = function(day, period) {
 	// If the last option is greater than the number of days in the month,
 	// remove the options that are for more days.
 		$(day_select_option).each(function() {		
-			if ($(this).val() > day) {
+			if (parseInt($(this).val()) > day) {
 				$(this).remove();
 			}
 		});
@@ -134,7 +134,9 @@ $(document).ready(function() {
 		
 		day = find_days(selected_month, period);
 		
-		alter_days(day, period);
+		if (day !== false) {
+			alter_days(day, period);
+		}
 		
 		day_select = month_select = year_select = "";
 		
@@ -163,7 +165,9 @@ $(document).ready(function() {
 		
 		day = find_days(selected_month, period);
 		
-		alter_days(day, period);
+		if (day !== false) {
+			alter_days(day, period);
+		}
 		
 		day_select = month_select = year_select = "";
 	});
