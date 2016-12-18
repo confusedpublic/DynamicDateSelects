@@ -62,7 +62,7 @@ find_days = function(month) {
 // Function to alter the day selection's option tags
 alter_days = function(day) {
 
-	if ($(day_select_last_option).val() < day) {
+	if (parseInit($(day_select_last_option).val()) < day) {
         // If the last option is less than the number of days in the month,
         // refill the select box with the correct number of options
 		selected_day = $(day_select_selected).val();
@@ -92,7 +92,7 @@ alter_days = function(day) {
 	// If the last option is greater than the number of days in the month,
 	// remove the options that are for more days.
 		$(day_select_option).each(function() {		
-			if ($(this).val() > day) {
+			if (parseInt($(this).val()) > day) {
 				$(this).remove();
 			}
 		});
@@ -106,7 +106,9 @@ $(document).ready(function() {
 		
 		day = find_days(selected_month);
 		
-		alter_days(day);
+		if (day !== false) {
+			alter_days(day);
+		}
 	});
 	
 	$(year_select).change(function() {
@@ -114,6 +116,8 @@ $(document).ready(function() {
 		
 		day = find_days(selected_month);
 		
-		alter_days(day);
+		if (day !== false) {
+			alter_days(day);
+		}
 	})
 });
